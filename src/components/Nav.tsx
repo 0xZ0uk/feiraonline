@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import cn from "classnames";
-import { useUser } from "@clerk/nextjs";
+import { useUser, UserButton } from "@clerk/nextjs";
 import { RxHamburgerMenu, RxMagnifyingGlass, RxAvatar } from "react-icons/rx";
 import { FaShoppingCart } from "react-icons/fa";
 import { headings } from "~/utils/fonts";
+import { useRouter } from "next/router";
 
 const Logo = () => {
   return (
@@ -46,20 +47,24 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 
 const DefaultNav = () => {
   const { isSignedIn } = useUser();
+  const router = useRouter();
 
   return (
     <ul className="hidden gap-4 text-green-900 md:flex md:items-center">
       <li className="menuLink">Produtos</li>
       <li className="menuLink">Feiras</li>
       <li className="menuLink">Sobre Nós</li>
-      <div className="ml-4 flex gap-4 text-2xl">
+      <div className="ml-4 flex items-center gap-4 text-2xl">
         {isSignedIn ? (
           <>
             <FaShoppingCart />
-            <RxAvatar />
+            <UserButton />
           </>
         ) : (
-          <button className="rounded-full bg-green-900 px-4 py-2 text-base font-bold text-white">
+          <button
+            className="rounded-full bg-green-900 px-4 py-2 text-base font-bold text-white"
+            onClick={() => router.push("/sign-in")}
+          >
             Entrar/Registar
           </button>
         )}
