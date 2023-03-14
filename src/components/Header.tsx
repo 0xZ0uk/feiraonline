@@ -1,7 +1,8 @@
 import React from "react";
-import Nav from "./Nav";
+
 import Topbar from "./Topbar";
 import Map from "react-map-gl";
+import Nav from "./Nav";
 
 type PositionType = { longitude: number; latitude: number };
 
