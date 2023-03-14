@@ -1,7 +1,8 @@
 import React from "react";
-import Nav from "./Nav";
+
 import Topbar from "./Topbar";
 import Map from "react-map-gl";
+import Nav from "./Nav";
 
 type PositionType = { longitude: number; latitude: number };
 
@@ -34,6 +35,7 @@ const MapLayer = () => {
       mapStyle="mapbox://styles/z0uk/clf83q5nb007n01mtl80oq4e0"
       mapboxAccessToken={process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_ACCESS_TOKEN}
       minZoom={7.5}
+      dragRotate={false}
       maxZoom={11}
       style={{
         height: "55vh",
