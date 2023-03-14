@@ -74,7 +74,7 @@ const Nav: React.FC<INav> = ({}) => {
   const [search, setSearch] = React.useState<string | undefined>(undefined);
 
   return (
-    <div className="flex h-20 w-full items-center justify-between border-b-2 border-b-green-900/10 px-6 md:px-8">
+    <div className="absolute z-20 flex h-20 w-full items-center justify-between border-b-2 border-b-green-900/10 bg-white/10 px-6 backdrop-blur md:px-8">
       <Logo />
       <SearchBar value={search} onChange={(value) => setSearch(value)} />
       <DefaultNav />
