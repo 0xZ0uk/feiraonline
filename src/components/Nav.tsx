@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
   return (
     <div
       className={cn(
-        "hidden h-12 items-center justify-between rounded-full border-2 border-green-900 px-4 aria-selected:w-96 md:flex"
+        "hidden h-12 items-center justify-between rounded-full border-2 border-green-900/60 px-4 aria-selected:w-96 md:flex"
       )}
     >
       <input
@@ -38,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
         placeholder="O que procura?"
         onChange={(e) => onChange(e.target.value)}
       />
-      <RxMagnifyingGlass className="cursor-pointer text-xl font-bold text-green-900" />
+      <RxMagnifyingGlass className="cursor-pointer text-xl font-bold text-green-900/60" />
     </div>
   );
 };

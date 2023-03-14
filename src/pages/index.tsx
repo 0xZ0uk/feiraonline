@@ -1,9 +1,16 @@
+import classNames from "classnames";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Banner from "~/components/Banner";
+import Footer from "~/components/Footer";
 import Header from "~/components/Header";
+import NewsCard from "~/components/NewsCard";
 import Product from "~/components/Product";
+import Section from "~/components/Section";
 
 import { api } from "~/utils/api";
+import { headings } from "~/utils/fonts";
+import { mock } from "~/utils/mock";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -17,54 +24,65 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-start">
         <Header />
-        <div className="grid grid-cols-3 gap-2 p-4 md:grid-cols-6 md:gap-4 md:p-8">
-          {[
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-            {
-              name: "Couve",
-              price: "0.99€/kg",
-              producer: "Leiria",
-              img: "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg",
-            },
-          ].map((p) => (
-            <Product {...p} />
-          ))}
-        </div>
+        <Section title="Produtores Próximos">
+          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
+            {mock.slice(0, 6).map((p) => (
+              <Product {...p} />
+            ))}
+          </div>
+        </Section>
+        <Section title="Destaques">
+          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
+            {mock.slice(0, 12).map((p) => (
+              <Product {...p} />
+            ))}
+          </div>
+        </Section>
+        <Banner>
+          <div>
+            <h1
+              className={classNames(
+                "font-headings text-4xl font-bold md:text-7xl",
+                headings.variable
+              )}
+            >
+              Compre Local
+            </h1>
+          </div>
+        </Banner>
+        <Section title="Novidades">
+          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
+            {mock.slice(0, 12).map((p) => (
+              <Product {...p} />
+            ))}
+          </div>
+        </Section>
+        <Section title="Noticías">
+          <div className="flex w-full flex-col gap-4 md:flex-row">
+            <NewsCard
+              className="basis-full md:basis-1/3"
+              img=""
+              src=""
+              title="FeiraOnline está aqui"
+              description="Descobre já tudo sobre nós"
+            />
+            <NewsCard
+              className="basis-full md:basis-1/3"
+              img=""
+              src=""
+              title="FeiraOnline está aqui"
+              description="Descobre já tudo sobre nós"
+            />
+            <NewsCard
+              className="basis-full md:basis-1/3"
+              img=""
+              src=""
+              title="FeiraOnline está aqui"
+              description="Descobre já tudo sobre nós"
+            />
+          </div>
+        </Section>
+        <Footer />
       </main>
     </>
   );

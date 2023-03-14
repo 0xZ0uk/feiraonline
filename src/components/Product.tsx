@@ -13,7 +13,7 @@ interface ProductProps {
 
 const CartButton = () => {
   return (
-    <button className="h-fit w-fit rounded-full bg-green-900 p-3 text-white">
+    <button className="flex h-10 w-10 items-center justify-center rounded-full bg-green-900 p-3 text-white transition-all duration-100 ease-in-out hover:h-11 hover:w-11">
       <FaShoppingCart />
     </button>
   );

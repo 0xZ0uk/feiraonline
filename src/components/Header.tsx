@@ -18,6 +18,9 @@ const Header: React.FC<IHeader> = () => {
         }
       />
       <Nav />
+      <p className="text-orange-500">
+        add a map here with local producers and feiras marked
+      </p>
     </div>
   );
 };
