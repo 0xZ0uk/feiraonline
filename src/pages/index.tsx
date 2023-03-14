@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { type NextPage } from "next";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import Banner from "~/components/Banner";
 import Footer from "~/components/Footer";
-import Header from "~/components/Header";
 import NewsCard from "~/components/NewsCard";
 import Product from "~/components/Product";
 import Section from "~/components/Section";
@@ -11,6 +11,11 @@ import Section from "~/components/Section";
 import { api } from "~/utils/api";
 import { headings } from "~/utils/fonts";
 import { mock } from "~/utils/mock";
+
+const Header = dynamic(() => import("~/components/Header"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -25,15 +30,15 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-start">
         <Header />
         <Section title="Produtores Próximos">
-          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
-            {mock.slice(0, 6).map((p) => (
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
+            {mock.slice(0, 5).map((p) => (
               <Product {...p} />
             ))}
           </div>
         </Section>
         <Section title="Destaques">
-          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
-            {mock.slice(0, 12).map((p) => (
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
+            {mock.slice(0, 10).map((p) => (
               <Product {...p} />
             ))}
           </div>
@@ -51,8 +56,8 @@ const Home: NextPage = () => {
           </div>
         </Banner>
         <Section title="Novidades">
-          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4">
-            {mock.slice(0, 12).map((p) => (
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
+            {mock.slice(0, 10).map((p) => (
               <Product {...p} />
             ))}
           </div>
