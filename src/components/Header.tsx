@@ -29,10 +29,12 @@ const MapLayer = () => {
     <Map
       initialViewState={{
         ...pos,
-        zoom: 9,
+        zoom: 10,
       }}
       mapStyle="mapbox://styles/z0uk/clf83q5nb007n01mtl80oq4e0"
       mapboxAccessToken={process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_ACCESS_TOKEN}
+      minZoom={7.5}
+      maxZoom={11}
       style={{
         height: "55vh",
       }}
@@ -53,7 +55,7 @@ const Header: React.FC<IHeader> = () => {
         message={
           <p>
             <span className="font-bold">Entrega Grátis</span> em encomendas
-            superiores a 50€
+            superiores a 150€
           </p>
         }
       />

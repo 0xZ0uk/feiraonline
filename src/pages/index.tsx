@@ -11,6 +11,7 @@ import Section from "~/components/Section";
 import { api } from "~/utils/api";
 import { headings } from "~/utils/fonts";
 import { mock } from "~/utils/mock";
+import ProducerCard from "~/components/ProducerCard";
 
 const Header = dynamic(() => import("~/components/Header"), {
   loading: () => <p>Loading...</p>,
@@ -30,9 +31,9 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-start">
         <Header />
         <Section title="Produtores Próximos">
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
-            {mock.slice(0, 5).map((p) => (
-              <Product {...p} />
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
+            {mock.slice(0, 4).map((p) => (
+              <ProducerCard {...p} />
             ))}
           </div>
         </Section>

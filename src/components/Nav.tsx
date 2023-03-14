@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import cn from "classnames";
+import { useUser } from "@clerk/nextjs";
 import { RxHamburgerMenu, RxMagnifyingGlass, RxAvatar } from "react-icons/rx";
 import { FaShoppingCart } from "react-icons/fa";
 import { headings } from "~/utils/fonts";
@@ -44,14 +45,24 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 };
 
 const DefaultNav = () => {
+  const { isSignedIn } = useUser();
+
   return (
     <ul className="hidden gap-4 text-green-900 md:flex md:items-center">
       <li className="menuLink">Produtos</li>
       <li className="menuLink">Feiras</li>
       <li className="menuLink">Sobre Nós</li>
       <div className="ml-4 flex gap-4 text-2xl">
-        <FaShoppingCart />
-        <RxAvatar />
+        {isSignedIn ? (
+          <>
+            <FaShoppingCart />
+            <RxAvatar />
+          </>
+        ) : (
+          <button className="rounded-full bg-green-900 px-4 py-2 text-base font-bold text-white">
+            Entrar/Registar
+          </button>
+        )}
       </div>
     </ul>
   );

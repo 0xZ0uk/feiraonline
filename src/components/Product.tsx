@@ -12,18 +12,6 @@ interface ProductProps {
   alternativePrice?: string;
 }
 
-interface BaseButton {
-  children: React.ReactElement;
-}
-
-const BaseButton: React.FC<BaseButton> = ({ children }) => {
-  return (
-    <button className="flex h-8 w-8 items-center justify-center rounded-full bg-green-900 p-2 text-white transition-all duration-100 ease-in-out hover:h-11 hover:w-11 md:h-10 md:w-10 md:p-3">
-      {children}
-    </button>
-  );
-};
-
 const Product: React.FC<ProductProps> = ({
   name,
   img,
@@ -71,12 +59,12 @@ const Product: React.FC<ProductProps> = ({
           </p>
         </div>
         <div className="flex gap-1 md:gap-2">
-          <BaseButton>
+          <button className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-900 bg-transparent p-1 font-bold text-green-900 transition-all duration-100 ease-in-out hover:h-11 hover:w-11 md:h-10 md:w-10">
             <RxHeart />
-          </BaseButton>
-          <BaseButton>
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-green-900 p-2 text-white transition-all duration-100 ease-in-out hover:h-11 hover:w-11 md:h-10 md:w-10 md:p-3">
             <FaShoppingCart />
-          </BaseButton>
+          </button>
         </div>
       </div>
     </div>
