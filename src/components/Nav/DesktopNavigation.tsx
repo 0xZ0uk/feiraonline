@@ -6,6 +6,7 @@ import { useUser, UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import { RxCaretDown } from "react-icons/rx";
 import { FaShoppingCart, FaTruck } from "react-icons/fa";
+import { Route, routes } from "~/utils/routes";
 
 const ListItem = React.forwardRef(
   ({ className, children, title, ...props }: any, forwardedRef) => (
@@ -31,6 +32,24 @@ const ListItem = React.forwardRef(
   )
 );
 
+const FreeDeliveryAd = () => {
+  return (
+    <li className="row-span-3 grid">
+      <NavigationMenu.Link asChild>
+        <div className="focus:shadow-violet7 flex h-full w-full select-none flex-col justify-end rounded-[6px] bg-gradient-to-b from-green-900 to-lime-700 p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]">
+          <FaTruck className="text-5xl text-white" />
+          <div className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
+            Entregas Grátis
+          </div>
+          <p className="text-[14px] leading-[1.3] text-white">
+            Em todas encomendas superiores a 150€.
+          </p>
+        </div>
+      </NavigationMenu.Link>
+    </li>
+  );
+};
+
 const DesktopNavigation = () => {
   const { isSignedIn } = useUser();
   const router = useRouter();
@@ -38,71 +57,37 @@ const DesktopNavigation = () => {
   return (
     <NavigationMenu.Root>
       <NavigationMenu.List className="hidden gap-4 text-green-900 md:flex md:items-center">
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="flex items-center gap-2">
-            Produtos <RxCaretDown aria-hidden />
-          </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-14 right-20 w-full sm:w-auto">
-            <ul className="one m-0 grid list-none gap-x-[10px] rounded-lg border border-green-900/20 bg-white/50 p-[22px] backdrop-blur-sm sm:w-[1000px] sm:grid-cols-[0.75fr_1fr_1fr_1fr]">
-              <li className="row-span-3 grid">
-                <NavigationMenu.Link asChild>
-                  <div className="focus:shadow-violet7 flex h-full w-full select-none flex-col justify-end rounded-[6px] bg-gradient-to-b from-green-900 to-lime-700 p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]">
-                    <FaTruck className="text-5xl text-white" />
-                    <div className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
-                      Entregas Grátis
-                    </div>
-                    <p className="text-[14px] leading-[1.3] text-white">
-                      Em todas encomendas superiores a 150€.
-                    </p>
-                  </div>
-                </NavigationMenu.Link>
-              </li>
+        {routes.map((r: Route) => {
+          if (!!r.subroutes) {
+            return (
+              <NavigationMenu.Item>
+                <NavigationMenu.Trigger className="flex items-center gap-2">
+                  Produtos <RxCaretDown aria-hidden />
+                </NavigationMenu.Trigger>
+                <NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-14 right-20 w-full sm:w-auto">
+                  <ul className="one m-0 grid list-none gap-x-[10px] rounded-lg border border-green-900/20 bg-white/50 p-[22px] backdrop-blur-sm sm:w-[1000px] sm:grid-cols-[0.75fr_1fr_1fr_1fr]">
+                    <FreeDeliveryAd />
+                    {r.subroutes.map((sr: Route) => {
+                      return (
+                        <ListItem href={sr.link} title={sr.name}>
+                          {sr.description}
+                        </ListItem>
+                      );
+                    })}
+                  </ul>
+                </NavigationMenu.Content>
+              </NavigationMenu.Item>
+            );
+          }
 
-              <ListItem href="/frutas-legumes" title="Frutas e Legumes">
-                CSS-in-JS with best-in-class developer experience.
-              </ListItem>
-              <ListItem href="/peixaria" title="Peixaria">
-                Beautiful, thought-out palettes with auto dark mode.
-              </ListItem>
-              <ListItem href="/talho" title="Talho">
-                Beautiful, thought-out palettes with auto dark mode.
-              </ListItem>
-              <ListItem href="/ovos-laticinios" title="Ovos e Latícinios">
-                A crisp set of 15x15 icons, balanced and consistent.
-              </ListItem>
-              <ListItem href="/charcutaria-queijos" title="Charcutaria">
-                CSS-in-JS with best-in-class developer experience.
-              </ListItem>
-              <ListItem href="/queijos" title="Queijos">
-                CSS-in-JS with best-in-class developer experience.
-              </ListItem>
-              <ListItem href="/padaria-pastelaria" title="Padaria e Pastelaria">
-                A crisp set of 15x15 icons, balanced and consistent.
-              </ListItem>
-              <ListItem href="/produtos-vegan" title="Produtos Vegan">
-                Beautiful, thought-out palettes with auto dark mode.
-              </ListItem>
-              <ListItem href="/artesanato" title="Artesanato">
-                A crisp set of 15x15 icons, balanced and consistent.
-              </ListItem>
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link>
-            <Link href={"/feiras"}>Feiras</Link>
-          </NavigationMenu.Link>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link>
-            <Link href={"/sobre"}>Receitas</Link>
-          </NavigationMenu.Link>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link>
-            <Link href={"/sobre"}>Sobre Nós</Link>
-          </NavigationMenu.Link>
-        </NavigationMenu.Item>
+          return (
+            <NavigationMenu.Item>
+              <NavigationMenu.Link>
+                <Link href={r.link}>{r.name}</Link>
+              </NavigationMenu.Link>
+            </NavigationMenu.Item>
+          );
+        })}
         <div className="ml-4 flex items-center gap-4 text-2xl">
           {isSignedIn ? (
             <>
