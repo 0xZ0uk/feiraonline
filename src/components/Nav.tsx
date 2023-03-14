@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import cn from "classnames";
+import { useUser, UserButton } from "@clerk/nextjs";
 import { RxHamburgerMenu, RxMagnifyingGlass, RxAvatar } from "react-icons/rx";
 import { FaShoppingCart } from "react-icons/fa";
 import { headings } from "~/utils/fonts";
+import { useRouter } from "next/router";
 
 const Logo = () => {
   return (
@@ -44,14 +46,28 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 };
 
 const DefaultNav = () => {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+
   return (
     <ul className="hidden gap-4 text-green-900 md:flex md:items-center">
       <li className="menuLink">Produtos</li>
       <li className="menuLink">Feiras</li>
       <li className="menuLink">Sobre Nós</li>
-      <div className="ml-4 flex gap-4 text-2xl">
-        <FaShoppingCart />
-        <RxAvatar />
+      <div className="ml-4 flex items-center gap-4 text-2xl">
+        {isSignedIn ? (
+          <>
+            <FaShoppingCart />
+            <UserButton />
+          </>
+        ) : (
+          <button
+            className="rounded-full bg-green-900 px-4 py-2 text-base font-bold text-white"
+            onClick={() => router.push("/sign-in")}
+          >
+            Entrar/Registar
+          </button>
+        )}
       </div>
     </ul>
   );
@@ -74,7 +90,7 @@ const Nav: React.FC<INav> = ({}) => {
   const [search, setSearch] = React.useState<string | undefined>(undefined);
 
   return (
-    <div className="flex h-20 w-full items-center justify-between border-b-2 border-b-green-900/10 px-6 md:px-8">
+    <div className="absolute z-20 flex h-20 w-full items-center justify-between border-b-2 border-b-green-900/10 bg-white/10 px-6 backdrop-blur md:px-8">
       <Logo />
       <SearchBar value={search} onChange={(value) => setSearch(value)} />
       <DefaultNav />
