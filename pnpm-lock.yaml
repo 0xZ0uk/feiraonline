@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@clerk/nextjs': ^4.11.7
+  '@clerk/types': ^3.30.1
   '@next/font': ^13.2.4
   '@prisma/client': ^4.9.0
   '@radix-ui/react-navigation-menu': ^1.1.2
@@ -38,6 +39,7 @@ specifiers:
 
 dependencies:
   '@clerk/nextjs': 4.11.7_ld2jel3hspngo3u5lti2kgl2sq
+  '@clerk/types': 3.30.1
   '@next/font': 13.2.4
   '@prisma/client': 4.11.0_prisma@4.11.0
   '@radix-ui/react-navigation-menu': 1.1.2_biqbaboplfbrettd7655fr4n2y
