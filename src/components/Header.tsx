@@ -1,8 +1,8 @@
 import React from "react";
-
 import Topbar from "./Topbar";
 import Map from "react-map-gl";
 import Nav from "./Nav";
+import classNames from "classnames";
 
 type PositionType = { longitude: number; latitude: number };
 
@@ -47,12 +47,17 @@ const MapLayer = () => {
 };
 
 interface IHeader {
-  backgroundImage?: string;
+  noMap?: boolean;
 }
 
-const Header: React.FC<IHeader> = () => {
+const Header: React.FC<IHeader> = ({ noMap }) => {
   return (
-    <div className="mb-16 h-[55vh] max-h-[55vh] w-full bg-orange-200">
+    <div
+      className={classNames(
+        "mb-16 max-h-[55vh] w-full bg-orange-200",
+        !noMap && "h-[55vh]"
+      )}
+    >
       <Topbar
         message={
           <p>
@@ -62,7 +67,7 @@ const Header: React.FC<IHeader> = () => {
         }
       />
       <Nav />
-      <MapLayer />
+      {!noMap && <MapLayer />}
     </div>
   );
 };

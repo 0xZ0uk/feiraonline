@@ -65,7 +65,7 @@ const DesktopNavigation = () => {
                   Produtos <RxCaretDown aria-hidden />
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-14 right-20 w-full sm:w-auto">
-                  <ul className="one m-0 grid list-none gap-x-[10px] rounded-lg border border-green-900/20 bg-white/50 p-[22px] backdrop-blur-sm sm:w-[1000px] sm:grid-cols-[0.75fr_1fr_1fr_1fr]">
+                  <ul className="one m-0 grid list-none gap-x-[10px] rounded-lg border border-green-900/20 bg-white p-[22px] backdrop-blur-sm sm:w-[1000px] sm:grid-cols-[0.75fr_1fr_1fr_1fr]">
                     <FreeDeliveryAd />
                     {r.subroutes.map((sr: Route) => {
                       return (

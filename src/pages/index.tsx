@@ -5,7 +5,6 @@ import Banner from "~/components/Banner";
 import NewsCard from "~/components/NewsCard";
 import Product from "~/components/Product";
 import Section from "~/components/Section";
-
 import { api } from "~/utils/api";
 import { headings } from "~/utils/fonts";
 import { mock } from "~/utils/mock";
